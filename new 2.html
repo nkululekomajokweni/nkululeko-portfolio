@@ -1,0 +1,566 @@
+NKULULEKO MAJOKWENI
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>nkululeko Portfolio</title>
+
+  <meta name="description" content="PALESA PLAATJIES - Software Developer & Robotics Engineer Portfolio">
+  <meta name="keywords" content="developer, robotics, HTML, CSS, JavaScript, Python, React">
+  <meta name="author" content="Nkululeko Majokweni">
+
+  <!-- THREE.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+  <!-- nkuu Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    body{
+      font-family:'Poppins',sans-serif;
+      background:black;
+      color:white;
+      scroll-behavior:smooth;
+      overflow-x:hidden;
+    }
+
+    /* 3D BACKGROUND */
+    #bg3d{
+      position:fixed;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+      z-index:-2;
+      opacity:0.3;
+    }
+
+    /* GLOW */
+    .glow{
+      position:fixed;
+      width:500px;
+      height:500px;
+      background:#00ff88;
+      filter:blur(150px);
+      opacity:0.15;
+      z-index:-1;
+      animation:moveGlow 10s infinite alternate;
+    }
+
+    @keyframes moveGlow{
+      from{
+        transform:translate(-100px,-100px);
+      }
+      to{
+        transform:translate(300px,200px);
+      }
+    }
+
+    /* NAVBAR */
+    nav{
+      position:fixed;
+      top:0;
+      width:100%;
+      background:rgba(0,0,0,0.85);
+      backdrop-filter:blur(10px);
+      border-bottom:1px solid #00ff88;
+      padding:15px;
+      display:flex;
+      justify-content:center;
+      gap:20px;
+      z-index:1000;
+      flex-wrap:wrap;
+    }
+
+    nav a{
+      text-decoration:none;
+    }
+
+    nav button{
+      background:transparent;
+      border:1px solid #00ff88;
+      color:#00ff88;
+      padding:10px 20px;
+      border-radius:30px;
+      cursor:pointer;
+      transition:0.3s;
+      font-weight:bold;
+    }
+
+    nav button:hover{
+      background:#00ff88;
+      color:black;
+      box-shadow:0 0 15px #00ff88;
+    }
+
+    /* SECTIONS */
+    section{
+      padding:100px 10%;
+      text-align:center;
+    }
+
+    h1{
+      font-size:5rem;
+      color:#00ff88;
+      text-shadow:0 0 20px #00ff88;
+    }
+
+    h2{
+      color:#00ff88;
+      margin-bottom:40px;
+      font-size:2.5rem;
+    }
+
+    /* HERO */
+    .hero{
+      height:100vh;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+    }
+
+    .hero p{
+      margin-top:15px;
+      font-size:1.2rem;
+    }
+
+    .typing{
+      color:#00ff88;
+      font-family:monospace;
+      margin-top:20px;
+      font-size:1.3rem;
+    }
+
+    /* GRID */
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:25px;
+    }
+
+    /* CARD */
+    .card{
+      background:rgba(255,255,255,0.05);
+      border:1px solid #00ff88;
+      padding:20px;
+      border-radius:20px;
+      transition:0.4s;
+      backdrop-filter:blur(8px);
+    }
+
+    .card:hover{
+      transform:translateY(-10px) scale(1.03);
+      box-shadow:0 0 20px #00ff88;
+    }
+
+    .card img{
+      width:100%;
+      height:220px;
+      object-fit:cover;
+      border-radius:15px;
+      transition:0.4s;
+    }
+
+    .card:hover img{
+      transform:scale(1.05);
+      filter:brightness(1.1);
+    }
+
+    .card h3{
+      color:#00ff88;
+      margin-top:15px;
+    }
+
+    .card p{
+      margin-top:10px;
+      line-height:1.6;
+    }
+
+    /* ABOUT */
+    #about p{
+      max-width:800px;
+      margin:auto;
+      line-height:1.8;
+      font-size:1.1rem;
+    }
+
+    /* PRICING */
+    .price{
+      color:#00ff88;
+      font-size:2rem;
+      margin:15px 0;
+    }
+
+    /* CONTACT */
+    .contact-box{
+      line-height:2;
+      font-size:1.1rem;
+    }
+
+    /* FOOTER */
+    footer{
+      text-align:center;
+      padding:30px;
+      border-top:1px solid #00ff88;
+      color:#aaa;
+    }
+
+    /* WHATSAPP */
+    .whatsapp{
+      position:fixed;
+      bottom:20px;
+      right:20px;
+      background:#00ff88;
+      color:black;
+      padding:15px 22px;
+      border-radius:50px;
+      text-decoration:none;
+      font-weight:bold;
+      box-shadow:0 0 20px #00ff88;
+      transition:0.3s;
+      z-index:1000;
+    }
+
+    .whatsapp:hover{
+      transform:scale(1.1);
+    }
+
+    /* MOBILE */
+    @media(max-width:768px){
+
+      h1{
+        font-size:3rem;
+      }
+
+      nav{
+        gap:10px;
+      }
+
+    }
+
+  </style>
+</head>
+
+<body>
+
+<!-- 3D -->
+<div id="bg3d"></div>
+<div class="glow"></div>
+
+<!-- NAVBAR -->
+<nav>
+  <a href="#home"><button>Home</button></a>
+  <a href="#about"><button>About</button></a>
+  <a href="#projects"><button>Projects</button></a>
+  <a href="#services"><button>Services</button></a>
+  <a href="#portfolio"><button>Portfolio</button></a>
+  <a href="#pricing"><button>Pricing</button></a>
+  <a href="#contact"><button>Contact</button></a>
+</nav>
+
+<!-- HERO -->
+<section id="home" class="hero">
+
+  <h1>Nkululeko Majokweni </h1>
+
+  <p>Junior Software Developer | Robotics Student</p>
+
+  <p class="typing" id="typing"></p>
+
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+
+  <h2>About Me</h2>
+
+  <p>
+    I create intelligent systems using software Development, robotics,
+    automation, and modern web technologies. I specialize in futuristic
+    websites, smart systems, and cinematic digital experiences.
+  </p>
+
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+
+  <h2>Projects</h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <h3>Frontend Development</h3>
+      <p>
+        Building modern responsive websites using HTML, CSS,
+        JavaScript,and cinematic UI designs.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>Backend Development</h3>
+      <p>
+        Creating secure backend systems using Python,
+        NodeJS, C#, and databases.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>Automation Systems</h3>
+      <p>
+        Robotics and automation systems integrated
+        with smart software technologies.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+
+  <h2>Services</h2>
+
+  <div class="grid">
+
+    <div class="card">
+      ✔ Modern Responsive Websites
+    </div>
+
+    <div class="card">
+      ✔ Fast & Secure Web Solutions
+    </div>
+
+    <div class="card">
+      ✔ Custom Business Designs
+    </div>
+
+    <div class="card">
+      ✔ Robotics & Automation Systems
+    </div>
+
+  </div>
+
+</section>
+
+<!-- PORTFOLIO -->
+<section id="portfolio">
+
+  <h2>What i can do current</h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=800&q=80">
+      <h3>Modern Web Development</h3>
+      <p>Professional responsive websites with cinematic UI design.</p>
+    </div>
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80">
+      <h3>Software Development</h3>
+      <p>Building scalable applications using modern technologies.</p>
+    </div>
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1537432376769-00aabc5f4c8c?auto=format&fit=crop&w=800&q=80">
+      <h3>Cyber & Tech Systems</h3>
+      <p>Advanced digital solutions and intelligent systems.</p>
+    </div>
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1526379095098-d400fd0bf935?auto=format&fit=crop&w=800&q=80">
+      <h3>Robotics Automation</h3>
+      <p>Automation systems integrated with software engineering.</p>
+    </div>
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=800&q=80">
+      <h3>Frontend Development</h3>
+      <p>Interactive websites using React, JavaScript, and CSS.</p>
+    </div>
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=80">
+      <h3>Backend Development</h3>
+      <p>Secure backend systems using Python, NodeJS, and databases.</p>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+
+  <h2>Pricing</h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <h3>Basic</h3>
+      <div class="price">R700 - R1,000</div>
+      <p>Simple website (1-3 pages)</p>
+    </div>
+
+    <div class="card">
+      <h3>Standard</h3>
+      <div class="price">R1,500 - R2,000</div>
+      <p>Business website with advanced features</p>
+    </div>
+
+    <div class="card">
+      <h3>Premium</h3>
+      <div class="price">R3,000+</div>
+      <p>Advanced systems & custom software solutions</p>
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- CONTACT -->
+<section id="contact">
+
+  <h2>Contact Me</h2>
+
+  <div class="contact-box">
+
+    <p>📞 067 568 8906</p>
+
+    <p>📧 nkululekomajokweni10@gmail.com</p>
+
+  </div>
+
+</section>
+
+<!-- FOOTER -->
+<footer>
+  © 2026 Nkululeko Majokweni | All Rights Reserved
+</footer>
+
+<!-- WHATSAPP -->
+<a href="https://wa.me/27664059747" target="_blank" class="whatsapp">
+  💬 WhatsApp Me
+</a>
+
+<script>
+
+  /* TYPING EFFECT */
+
+  const roles = [
+    "I build futuristic websites.",
+    "I create smart automation systems.",
+    "I develop modern software solutions.",
+    "I automate the future."
+  ];
+
+  let i = 0;
+  let j = 0;
+
+  const typingEl = document.getElementById("typing");
+
+  function type(){
+
+    if(j < roles[i].length){
+
+      typingEl.innerHTML += roles[i][j];
+
+      j++;
+
+      setTimeout(type,50);
+
+    }else{
+
+      setTimeout(() => {
+
+        typingEl.innerHTML = "";
+
+        j = 0;
+
+        i = (i + 1) % roles.length;
+
+        type();
+
+      },1500);
+
+    }
+
+  }
+
+  type();
+
+  /* THREE JS */
+
+  const scene = new THREE.Scene();
+
+  const camera = new THREE.PerspectiveCamera(
+    75,
+    window.innerWidth/window.innerHeight,
+    0.1,
+    1000
+  );
+
+  const renderer = new THREE.WebGLRenderer({
+    alpha:true,
+    antialias:true
+  });
+
+  renderer.setSize(window.innerWidth,window.innerHeight);
+
+  document.getElementById("bg3d").appendChild(renderer.domElement);
+
+  const geometry = new THREE.TorusKnotGeometry(10,3,150,20);
+
+  const material = new THREE.MeshBasicMaterial({
+    color:0x00ff88,
+    wireframe:true
+  });
+
+  const knot = new THREE.Mesh(geometry,material);
+
+  scene.add(knot);
+
+  camera.position.z = 25;
+
+  function animate(){
+
+    requestAnimationFrame(animate);
+
+    knot.rotation.x += 0.003;
+    knot.rotation.y += 0.005;
+
+    renderer.render(scene,camera);
+
+  }
+
+  animate();
+
+  window.addEventListener("resize",() => {
+
+    camera.aspect = window.innerWidth/window.innerHeight;
+
+    camera.updateProjectionMatrix();
+
+    renderer.setSize(window.innerWidth,window.innerHeight);
+
+  });
+
+</script>
+
+</body>
+</html>
+
